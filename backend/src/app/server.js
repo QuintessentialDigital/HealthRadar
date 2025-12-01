@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const connectDB = require("../core/db/mongoose");
 const { port } = require("../config/env");
 
