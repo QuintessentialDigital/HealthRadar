@@ -21,7 +21,7 @@ async function callDentistRadarScan(postcode, radiusMiles) {
   console.log("[DentistRadar] Calling:", url);
 
   const response = await axios.get(url, {
-    timeout: 10000,
+    timeout: 45000,
     // Sometimes APIs expect a User-Agent to not think it's a bot
     headers: {
       "User-Agent": "HealthRadar/1.0 (+server-side)"
