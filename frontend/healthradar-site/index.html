@@ -114,22 +114,57 @@
           Instead of trying to solve everything at once, HealthRadar goes deep on one access problem at a time.
         </p>
 
-        <div class="grid grid-2">
-          <div class="card">
-            <div class="badge">Live now</div>
-            <h3>DentistRadar</h3>
-            <p>
-              Find NHS dentists accepting new patients without endlessly refreshing NHS pages or calling every practice.
-            </p>
-            <ul class="feature-list">
-              <li>Enter your postcode and travel radius</li>
-              <li>We monitor NHS listings for changes</li>
-              <li>Get alerts when nearby practices open up</li>
-            </ul>
-            <a href="https://www.dentistradar.co.uk" class="btn btn-link">
-              Go to DentistRadar →
-            </a>
-          </div>
+       <div class="card">
+  <div class="badge">Live now</div>
+  <h3>DentistRadar</h3>
+  <p>
+    Find NHS dentists accepting new patients without endlessly refreshing NHS pages or calling every practice.
+  </p>
+  <ul class="feature-list">
+    <li>Enter your postcode and travel radius</li>
+    <li>We monitor NHS listings for changes</li>
+    <li>Get alerts when nearby practices open up</li>
+  </ul>
+  <a href="https://www.dentistradar.co.uk" class="btn btn-link">
+    Go to DentistRadar →
+  </a>
+
+  <hr style="border: none; border-top: 1px solid rgba(31, 41, 55, 0.7); margin: 0.9rem 0;" />
+
+  <h4 style="margin: 0 0 0.5rem; font-size: 0.9rem;">Quick check via HealthRadar</h4>
+  <p style="margin: 0 0 0.6rem; font-size: 0.85rem; color: var(--text-soft);">
+    Try a live availability preview using the HealthRadar API prototype.
+  </p>
+
+  <form id="dentist-preview-form" class="form-inline">
+    <div class="form-inline-group">
+      <input
+        type="text"
+        id="dentist-postcode"
+        name="postcode"
+        required
+        placeholder="Postcode (e.g. RG41 4UW)"
+      />
+      <input
+        type="number"
+        id="dentist-radius"
+        name="radiusMiles"
+        min="1"
+        max="50"
+        value="25"
+        placeholder="Radius (miles)"
+      />
+      <button type="submit" class="btn btn-secondary">
+        Check
+      </button>
+    </div>
+    <p id="dentist-preview-status" class="form-footnote" style="margin-top: 0.4rem;">
+      No search yet. Enter a postcode to preview NHS dentist availability.
+    </p>
+  </form>
+
+  <div id="dentist-preview-results" class="preview-results"></div>
+</div>
 
           <div class="card">
             <div class="badge badge-muted">Coming soon</div>
