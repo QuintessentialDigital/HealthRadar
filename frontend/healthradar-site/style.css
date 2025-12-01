@@ -559,6 +559,62 @@ img {
 
 /* RESPONSIVE */
 
+.form-inline {
+  margin-top: 0.4rem;
+}
+
+.form-inline-group {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.form-inline-group input {
+  flex: 1 1 140px;
+  border-radius: 999px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 0.45rem 0.8rem;
+  font: inherit;
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+}
+
+.preview-results {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  border-radius: 12px;
+  border: 1px dashed rgba(31, 41, 55, 0.9);
+  padding: 0.6rem 0.7rem;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.preview-results-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.preview-results-item {
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.6);
+}
+
+.preview-results-item:last-child {
+  border-bottom: none;
+}
+
+.preview-results-item-title {
+  font-weight: 500;
+  color: var(--text);
+}
+
+.preview-results-item-meta {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
 @media (max-width: 900px) {
   .hero-inner {
     grid-template-columns: minmax(0, 1fr);
