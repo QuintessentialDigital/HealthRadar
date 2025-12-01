@@ -3,6 +3,7 @@ const connectDB = require("../core/db/mongoose");
 const { port } = require("../config/env");
 
 require("../domain/radar/dentist/dentist.radar"); // register radar
+require("../domain/radar/gp/gp.radar"); // register GP radar
 
 const indexRoutes = require("../interfaces/http/routes/index.routes");
 const radarRoutes = require("../interfaces/http/routes/radar.routes");
