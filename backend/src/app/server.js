@@ -12,6 +12,13 @@ const radarRoutes = require("../interfaces/http/routes/radar.routes");
 const app = express();
 app.use(express.json());
 
+// Allow browser frontends to call this API
+app.use(
+  cors({
+    origin: "*", // you can lock this down later to specific domains
+  })
+);
+
 // Routes
 app.use("/", indexRoutes);
 app.use("/api/radar", radarRoutes);
