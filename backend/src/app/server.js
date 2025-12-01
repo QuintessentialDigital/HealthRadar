@@ -8,6 +8,8 @@ require("../domain/radar/gp/gp.radar"); // register GP radar
 
 const indexRoutes = require("../interfaces/http/routes/index.routes");
 const radarRoutes = require("../interfaces/http/routes/radar.routes");
+const waitlistRoutes = require("../interfaces/http/routes/waitlist.routes");
+
 
 const app = express();
 app.use(express.json());
@@ -22,6 +24,7 @@ app.use(
 // Routes
 app.use("/", indexRoutes);
 app.use("/api/radar", radarRoutes);
+app.use("/api/waitlist", waitlistRoutes);  
 
 // Start server
 connectDB().then(() => {
