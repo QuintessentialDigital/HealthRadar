@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="HealthRadar helps people find NHS care faster, starting with NHS dentists via DentistRadar and soon GPRadar for GP access."
+    content="HealthRadar helps people access NHS care faster by watching NHS availability and sending simple alerts. Start today with DentistRadar, next GPRadar."
   />
 
   <style>
@@ -67,7 +67,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 10px 16px 4px;
+    }
+
+    .hr-logo-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .hr-logo {
@@ -96,6 +102,12 @@
 
     .hr-logo span:last-child {
       color: var(--hr-color-primary);
+    }
+
+    .hr-tagline {
+      font-size: 0.72rem;
+      color: var(--hr-color-muted);
+      padding-left: 2px;
     }
 
     .hr-nav-desktop {
@@ -163,6 +175,7 @@
       font-weight: 600;
       cursor: pointer;
       border: 1px solid transparent;
+      transition: all 0.15s ease-out;
     }
 
     .hr-btn-primary {
@@ -172,6 +185,7 @@
 
     .hr-btn-primary:hover {
       background: #1d4ed8;
+      transform: translateY(-1px);
     }
 
     .hr-btn-secondary {
@@ -182,6 +196,7 @@
 
     .hr-btn-secondary:hover {
       border-color: var(--hr-color-primary);
+      transform: translateY(-1px);
     }
 
     .hr-btn-ghost {
@@ -220,22 +235,27 @@
 
     .hr-hero {
       padding-top: 24px;
+      background: radial-gradient(circle at top right, #dbeafe 0, transparent 60%);
     }
 
     .hr-hero-grid {
       display: flex;
       flex-direction: column;
       gap: 24px;
+      position: relative;
     }
 
-    .hr-hero-text h1 {
-      font-size: 1.7rem;
-      margin-bottom: 12px;
+    .hr-hero-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 0 0 8px;
     }
 
-    .hr-hero-text p {
-      font-size: 0.98rem;
+    .hr-hero-subtitle {
+      font-size: 1.02rem;
       color: var(--hr-color-muted);
+      margin: 0;
     }
 
     .hr-hero-ctas {
@@ -266,6 +286,12 @@
     .hr-text-muted {
       font-size: 0.85rem;
       color: var(--hr-color-muted);
+    }
+
+    .hr-hero-illustration {
+      width: 120px;
+      opacity: 0.6;
+      display: none;
     }
 
     /* FORMS */
@@ -350,6 +376,13 @@
       border: 1px solid var(--hr-color-border);
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
       position: relative;
+      transition: all 0.2s ease-out;
+    }
+
+    .hr-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+      border-color: var(--hr-color-primary);
     }
 
     .hr-card h3 {
@@ -372,6 +405,14 @@
 
     .hr-card-list li + li {
       margin-top: 4px;
+    }
+
+    .hr-card-dentist {
+      border-top: 4px solid var(--hr-accent-dentist);
+    }
+
+    .hr-card-gp {
+      border-top: 4px solid var(--hr-accent-gp);
     }
 
     /* RADAR TAGS */
@@ -420,6 +461,11 @@
       border: 1px solid var(--hr-color-border);
     }
 
+    .hr-step-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+    }
+
     .hr-step-number {
       width: 28px;
       height: 28px;
@@ -459,6 +505,11 @@
       border-radius: var(--hr-radius);
       padding: 12px;
       border: 1px solid var(--hr-color-border);
+    }
+
+    .hr-impact-icon {
+      font-size: 1.4rem;
+      margin-bottom: 4px;
     }
 
     .hr-impact-number {
@@ -526,6 +577,37 @@
       color: var(--hr-color-muted);
     }
 
+    /* SIMPLE LIST */
+
+    .hr-list {
+      padding-left: 18px;
+      color: var(--hr-color-muted);
+      font-size: 0.95rem;
+    }
+
+    .hr-list li {
+      margin-bottom: 6px;
+    }
+
+    /* GPRADAR NEXT STEPS */
+
+    .hr-next-steps h4 {
+      font-size: 1rem;
+      margin-top: 20px;
+      margin-bottom: 6px;
+    }
+
+    .hr-next-steps ul {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--hr-color-muted);
+      font-size: 0.9rem;
+    }
+
+    .hr-next-steps li {
+      margin-bottom: 4px;
+    }
+
     /* FOOTER */
 
     .hr-footer {
@@ -553,7 +635,7 @@
 
     @media (min-width: 768px) {
       .hr-header-inner {
-        padding: 12px 0;
+        padding: 10px 0 6px;
       }
 
       .hr-nav-desktop {
@@ -586,12 +668,19 @@
         flex: 1;
       }
 
-      .hr-hero-text h1 {
-        font-size: 2rem;
+      .hr-hero-title {
+        font-size: 2.1rem;
       }
 
       .hr-hero-ctas {
         flex-direction: row;
+      }
+
+      .hr-hero-illustration {
+        display: block;
+        position: absolute;
+        right: 5%;
+        top: 12%;
       }
 
       .hr-grid-3 {
@@ -616,19 +705,29 @@
         justify-content: space-between;
       }
     }
+
+    @media (max-width: 767px) {
+      .hr-tagline {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
   <!-- HEADER -->
   <header class="hr-header">
     <div class="hr-container hr-header-inner">
-      <div class="hr-logo">
-        <span class="hr-logo-icon" aria-hidden="true"></span>
-        <span>Health</span><span>Radar</span>
+      <div class="hr-logo-wrap">
+        <div class="hr-logo">
+          <span class="hr-logo-icon" aria-hidden="true"></span>
+          <span>Health</span><span>Radar</span>
+        </div>
+        <div class="hr-tagline">We watch NHS access so you don’t have to.</div>
       </div>
       <nav class="hr-nav-desktop">
         <a href="#how-it-works">How it works</a>
         <a href="#radars">Radars</a>
+        <a href="#why">Why HealthRadar</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -642,6 +741,7 @@
     <nav class="hr-nav-mobile" id="mobileNav">
       <a href="#how-it-works">How it works</a>
       <a href="#radars">Radars</a>
+      <a href="#why">Why HealthRadar</a>
       <a href="#pricing">Pricing</a>
       <a href="#faq">FAQ</a>
       <a href="#gpradar" class="hr-link-strong">Join GP waitlist</a>
@@ -653,17 +753,19 @@
     <section class="hr-section hr-hero">
       <div class="hr-container hr-hero-grid">
         <div class="hr-hero-text">
-          <h1>Find NHS care faster – without constant calling around.</h1>
-          <p>
-            HealthRadar watches NHS access for you. Start today with NHS dentists via
-            <strong>DentistRadar</strong>, and soon GPs and more – all from a single place.
+          <h1 class="hr-hero-title">
+            Find NHS care faster — without the endless phone calls.
+          </h1>
+          <p class="hr-hero-subtitle">
+            HealthRadar watches NHS availability and alerts you when something opens up.
+            Start today with <strong>DentistRadar</strong> — next up, <strong>GPRadar</strong>.
           </p>
           <div class="hr-hero-ctas">
             <a href="https://www.dentistradar.co.uk" class="hr-btn-primary">Find an NHS dentist</a>
             <a href="#gpradar" class="hr-btn-secondary">Join GPRadar waitlist</a>
           </div>
           <p class="hr-hero-trust">
-            Built in the UK. Designed for people tired of refreshing NHS pages and calling every practice in town.
+            Independent service. Built for people tired of refreshing NHS pages and calling every practice in town.
           </p>
         </div>
 
@@ -691,19 +793,25 @@
             No search yet. Enter a postcode to preview NHS dentist availability.
           </div>
         </div>
+
+        <!-- Optional simple hero illustration -->
+        <div class="hr-hero-illustration" aria-hidden="true">
+          <!-- Simple radar emoji / placeholder; replace with SVG later if you like -->
+          📡
+        </div>
       </div>
     </section>
 
-    <!-- AT A GLANCE / RADARS -->
+    <!-- RADARS -->
     <section class="hr-section" id="radars">
       <div class="hr-container">
-        <h2>HealthRadar at a glance</h2>
+        <h2>Radars built around real NHS access struggles.</h2>
         <p class="hr-section-subtitle">
-          One simple idea: instead of you chasing NHS updates, HealthRadar does the watching and sends you alerts.
+          Each HealthRadar tool focuses on one access problem — and solves it with simple, timely alerts.
         </p>
         <div class="hr-grid-3">
           <!-- DentistRadar card -->
-          <article class="hr-card">
+          <article class="hr-card hr-card-dentist">
             <div class="hr-tag hr-tag-dentist">
               DentistRadar
               <span class="hr-tag-status">Live now</span>
@@ -723,15 +831,15 @@
           </article>
 
           <!-- GPRadar card -->
-          <article class="hr-card">
+          <article class="hr-card hr-card-gp">
             <div class="hr-tag hr-tag-gp">
               GPRadar
               <span class="hr-tag-status">Coming soon</span>
             </div>
             <h3>🩺 GP registration & access</h3>
             <p>
-              A simple way to track NHS GP practice registrations in your area. Join the waitlist to be notified when we
-              launch.
+              A simple way to track NHS GP registration options in your area.
+              Join the waitlist to help us prioritise your region.
             </p>
             <ul class="hr-card-list">
               <li>Postcode-based GP availability insights</li>
@@ -755,8 +863,8 @@
               to mental health and beyond.
             </p>
             <ul class="hr-card-list">
-              <li>Focus on high-friction access problems</li>
-              <li>Guided by real demand and user stories</li>
+              <li>Focused on high-friction access problems</li>
+              <li>Guided by user demand and stories</li>
               <li>Built on the same alert engine</li>
             </ul>
             <button class="hr-btn-ghost hr-btn-full" disabled>
@@ -772,26 +880,27 @@
       <div class="hr-container">
         <h2>How HealthRadar works</h2>
         <p class="hr-section-subtitle">
-          Each “radar” focuses on a specific type of NHS service – starting with dentists – and continuously checks
-          availability so you don’t have to.
+          We can’t fix the whole system, but we can help you see your options more clearly.
         </p>
         <div class="hr-steps">
           <div class="hr-step">
+            <div class="hr-step-icon">🎯</div>
             <div class="hr-step-number">1</div>
             <h3>Choose the care you need</h3>
             <p>
-              Start with NHS dentists via DentistRadar. Soon, you’ll be able to track GPs, A&amp;E and other services.
+              Start with NHS dentists via DentistRadar. GPRadar is next, with more radars planned.
             </p>
           </div>
           <div class="hr-step">
+            <div class="hr-step-icon">📍</div>
             <div class="hr-step-number">2</div>
-            <h3>Set your postcode &amp; radius</h3>
+            <h3>Set your postcode & radius</h3>
             <p>
-              Tell HealthRadar where you are and how far you’re willing to travel. Your radar quietly watches for
-              changes.
+              Tell HealthRadar where you are and how far you’re willing to travel. Your radar quietly watches for changes.
             </p>
           </div>
           <div class="hr-step">
+            <div class="hr-step-icon">📡</div>
             <div class="hr-step-number">3</div>
             <h3>We watch public NHS data</h3>
             <p>
@@ -799,11 +908,11 @@
             </p>
           </div>
           <div class="hr-step">
+            <div class="hr-step-icon">🔔</div>
             <div class="hr-step-number">4</div>
             <h3>Get alerts when something opens up</h3>
             <p>
-              When a practice shows as accepting new patients, you get an alert – so you can act quickly before places
-              fill up.
+              When a practice shows as accepting new patients, you get an alert – so you can act before places fill up.
             </p>
           </div>
         </div>
@@ -813,17 +922,20 @@
     <!-- IMPACT -->
     <section class="hr-section hr-section-alt">
       <div class="hr-container">
-        <h2>HealthRadar in action</h2>
+        <h2>HealthRadar in action — and growing.</h2>
         <div class="hr-impact-grid">
           <div class="hr-impact-stat">
+            <div class="hr-impact-icon">👥</div>
             <div class="hr-impact-number">2,000+</div>
             <div class="hr-impact-label">people signed up for DentistRadar</div>
           </div>
           <div class="hr-impact-stat">
+            <div class="hr-impact-icon">⏱️</div>
             <div class="hr-impact-number">⏱️</div>
             <div class="hr-impact-label">NHS practices scanned daily</div>
           </div>
           <div class="hr-impact-stat">
+            <div class="hr-impact-icon">📬</div>
             <div class="hr-impact-number">📬</div>
             <div class="hr-impact-label">Alerts helping people across England</div>
           </div>
@@ -835,6 +947,18 @@
             <span>— DentistRadar user, UK</span>
           </blockquote>
         </div>
+      </div>
+    </section>
+
+    <!-- WHY HEALTHRADAR -->
+    <section class="hr-section" id="why">
+      <div class="hr-container">
+        <h2>Why HealthRadar?</h2>
+        <ul class="hr-list">
+          <li>Designed around real NHS access problems, not tech for tech’s sake.</li>
+          <li>Gives ordinary people an information advantage in a difficult system.</li>
+          <li>Independent, transparent, and built with the public in mind.</li>
+        </ul>
       </div>
     </section>
 
@@ -872,7 +996,11 @@
               <li>Faster, priority alerts</li>
               <li>Early access to new radars (GP, A&amp;E, etc.)</li>
             </ul>
-            <button class="hr-btn-secondary hr-btn-full" type="button" onclick="document.getElementById('gpradar').scrollIntoView({behavior: 'smooth'})">
+            <button
+              class="hr-btn-secondary hr-btn-full"
+              type="button"
+              onclick="document.getElementById('gpradar').scrollIntoView({behavior: 'smooth'})"
+            >
               Join early access list
             </button>
           </article>
@@ -885,8 +1013,8 @@
       <div class="hr-container">
         <h2>Be the first to know when GPRadar launches</h2>
         <p>
-          We’re building GPRadar carefully based on real demand and real access issues. Leave your email and postcode
-          area to be notified when it goes live and to help us prioritise your region.
+          GP access is becoming harder everywhere. We’re fixing the information gap first. Join the waitlist so we can
+          prioritise your area and keep you updated.
         </p>
         <form class="hr-form" id="gpWaitlistForm">
           <label>
@@ -899,7 +1027,11 @@
           </label>
           <label>
             Anything specific you’re struggling with? (optional)
-            <textarea name="struggle" rows="3" placeholder="Tell us a bit about your GP access situation"></textarea>
+            <textarea
+              name="struggle"
+              rows="3"
+              placeholder="Tell us a bit about your GP access situation"
+            ></textarea>
           </label>
           <button type="submit" class="hr-btn-primary hr-btn-full">Join waitlist</button>
           <p class="hr-text-muted">
@@ -907,6 +1039,15 @@
           </p>
         </form>
         <div id="gpWaitlistMessage" class="hr-text-muted" style="margin-top:8px;"></div>
+
+        <div class="hr-next-steps">
+          <h4>What happens next?</h4>
+          <ul>
+            <li>We confirm your place on the waitlist.</li>
+            <li>We prioritise regions with the most interest.</li>
+            <li>You’ll get early access when GPRadar launches in your area.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -934,7 +1075,7 @@
         <div class="hr-faq-item">
           <h3>Will you cover GPs, A&amp;E and other services?</h3>
           <p>
-            Yes – that’s the plan. GPRadar is the next radar on our roadmap, followed by additional access tools where
+            Yes – that’s the plan. GPRadar is the next radar on our roadmap, followed by additional tools where
             people consistently struggle to find NHS care.
           </p>
         </div>
@@ -942,7 +1083,7 @@
         <div class="hr-faq-item">
           <h3>How will subscriptions work?</h3>
           <p>
-            The goal is simple: one HealthRadar Plus subscription that unlocks multiple postcodes, faster alerts and early
+            The goal is one HealthRadar Plus subscription that unlocks multiple postcodes, faster alerts and early
             access across all radars. Pricing will stay transparent and fair.
           </p>
         </div>
@@ -950,4 +1091,129 @@
     </section>
   </main>
 
-  <!-- FO
+  <!-- FOOTER -->
+  <footer class="hr-footer">
+    <div class="hr-container hr-footer-inner">
+      <p>
+        © <span id="year"></span> HealthRadar — helping people access NHS care faster, one radar at a time.
+      </p>
+      <div class="hr-footer-links">
+        <a href="https://www.dentistradar.co.uk">DentistRadar</a>
+        <a href="#gpradar">GPRadar waitlist</a>
+        <a href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.hr-nav-toggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (navToggle && mobileNav) {
+      navToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('hr-nav-mobile-open');
+      });
+    }
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Dentist preview form – adapt endpoint/JSON shape to your backend
+    const previewForm = document.getElementById('dentistPreviewForm');
+    const previewResults = document.getElementById('previewResults');
+
+    if (previewForm && previewResults) {
+      previewForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(previewForm);
+        const postcode = (formData.get('postcode') || '').trim();
+        const radiusMiles = formData.get('radiusMiles') || '10';
+
+        if (!postcode) {
+          previewResults.innerHTML = '<span class="hr-error">Please enter a postcode.</span>';
+          return;
+        }
+
+        previewResults.textContent = 'Checking availability…';
+
+        try {
+          const res = await fetch('/api/radar/dentist/preview', {
+            method: 'POST', // change to 'GET' + query params if your API is GET-based
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ postcode, radiusMiles })
+          });
+
+          const data = await res.json();
+
+          if (!data.ok) {
+            previewResults.innerHTML =
+              '<span class="hr-error">' +
+              (data.error || 'No availability found yet. Try a different radius or check back later.') +
+              '</span>';
+            return;
+          }
+
+          const practices = data.practices || data.results || [];
+          if (!practices.length) {
+            previewResults.innerHTML =
+              '<span>No accepting NHS dentists found in this radius right now. You can still use DentistRadar to get alerts when this changes.</span>';
+            return;
+          }
+
+          const items = practices.slice(0, 5).map((p) => {
+            const name = p.name || 'NHS dental practice';
+            const area = p.town || p.city || p.postcode || '';
+            const distVal = p.distanceMiles;
+            const distance = distVal
+              ? `${distVal.toFixed ? distVal.toFixed(1) : distVal} miles away`
+              : '';
+            return `
+              <li>
+                <div class="hr-preview-name">${name}</div>
+                <div>${[area, distance].filter(Boolean).join(' · ')}</div>
+              </li>
+            `;
+          });
+
+          previewResults.innerHTML =
+            '<div><strong>Preview results:</strong></div><ul class="hr-preview-list">' +
+            items.join('') +
+            '</ul>';
+        } catch (err) {
+          previewResults.innerHTML =
+            '<span class="hr-error">Something went wrong checking availability. Please try again in a moment.</span>';
+        }
+      });
+    }
+
+    // GP waitlist form – wire this to your backend when ready
+    const gpForm = document.getElementById('gpWaitlistForm');
+    const gpMsg = document.getElementById('gpWaitlistMessage');
+
+    if (gpForm && gpMsg) {
+      gpForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        gpMsg.textContent = 'Adding you to the waitlist…';
+
+        const formData = new FormData(gpForm);
+        const payload = {
+          email: (formData.get('email') || '').trim(),
+          postcodeArea: (formData.get('postcodeArea') || '').trim(),
+          struggle: (formData.get('struggle') || '').trim()
+        };
+
+        // TODO: replace with real POST to your backend:
+        // await fetch('/api/radar/gp/subscribe', { method: 'POST', headers: {...}, body: JSON.stringify(payload) });
+
+        setTimeout(() => {
+          gpForm.reset();
+          gpMsg.innerHTML =
+            '<span class="hr-success">You’re on the GPRadar waitlist. We’ll prioritise areas with the most interest and keep you updated.</span>';
+        }, 600);
+      });
+    }
+  </script>
+</body>
+</html>
