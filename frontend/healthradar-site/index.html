@@ -1,529 +1,308 @@
-:root {
-  --hr-bg: #f8fafc;
-  --hr-bg-alt: #ffffff;
-  --hr-border: #e2e8f0;
-  --hr-text: #0f172a;
-  --hr-muted: #64748b;
-  --hr-primary: #2563eb;
-  --hr-primary-soft: #dbeafe;
-  --hr-radius: 12px;
-  --hr-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: var(--hr-text);
-  background: var(--hr-bg);
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.hr-container {
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-/* HEADER */
-
-.hr-header {
-  background: #ffffff;
-  border-bottom: 1px solid var(--hr-border);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.hr-header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 16px;
-}
-
-.hr-logo {
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-.hr-nav-desktop {
-  display: none;
-  gap: 16px;
-  margin-left: 24px;
-  font-size: 0.95rem;
-}
-
-.hr-nav-desktop a {
-  color: var(--hr-muted);
-}
-
-.hr-nav-desktop a:hover {
-  color: var(--hr-text);
-}
-
-.hr-nav-cta {
-  display: none;
-}
-
-.hr-nav-toggle {
-  background: none;
-  border: none;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-/* Mobile nav */
-
-.hr-nav-mobile {
-  display: none;
-  flex-direction: column;
-  padding: 8px 16px 16px;
-  background: #ffffff;
-  border-bottom: 1px solid var(--hr-border);
-}
-
-.hr-nav-mobile a {
-  padding: 8px 0;
-  color: var(--hr-muted);
-}
-
-.hr-nav-mobile a.hr-link-strong {
-  color: var(--hr-primary);
-  font-weight: 600;
-}
-
-.hr-nav-mobile-open {
-  display: flex;
-}
-
-/* BUTTONS */
-
-.hr-btn-primary,
-.hr-btn-secondary,
-.hr-btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 10px 18px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.hr-btn-primary {
-  background: var(--hr-primary);
-  color: white;
-}
-
-.hr-btn-primary:hover {
-  background: #1d4ed8;
-}
-
-.hr-btn-secondary {
-  background: #ffffff;
-  border-color: var(--hr-border);
-  color: var(--hr-text);
-}
-
-.hr-btn-secondary:hover {
-  border-color: var(--hr-primary);
-}
-
-.hr-btn-ghost {
-  background: transparent;
-  border-color: var(--hr-border);
-  color: var(--hr-text);
-}
-
-.hr-btn-full {
-  width: 100%;
-  justify-content: center;
-}
-
-/* HERO */
-
-.hr-section {
-  padding: 40px 0;
-}
-
-.hr-section-alt {
-  background: #f1f5f9;
-}
-
-.hr-hero {
-  padding-top: 24px;
-}
-
-.hr-hero-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.hr-hero-text h1 {
-  font-size: 1.7rem;
-  margin-bottom: 12px;
-}
-
-.hr-hero-text p {
-  font-size: 0.98rem;
-  color: var(--hr-muted);
-}
-
-.hr-hero-ctas {
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.hr-hero-trust {
-  margin-top: 10px;
-  font-size: 0.85rem;
-  color: var(--hr-muted);
-}
-
-.hr-hero-widget {
-  background: #ffffff;
-  border-radius: var(--hr-radius);
-  box-shadow: var(--hr-shadow);
-  padding: 16px;
-}
-
-.hr-hero-widget h2 {
-  font-size: 1.2rem;
-  margin-bottom: 6px;
-}
-
-.hr-text-muted {
-  font-size: 0.85rem;
-  color: var(--hr-muted);
-}
-
-/* FORMS */
-
-.hr-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.hr-form label {
-  font-size: 0.85rem;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.hr-form input,
-.hr-form select,
-.hr-form textarea {
-  border-radius: 8px;
-  border: 1px solid var(--hr-border);
-  padding: 8px 10px;
-  font-size: 0.95rem;
-  font-family: inherit;
-}
-
-.hr-form textarea {
-  resize: vertical;
-}
-
-.hr-preview-results {
-  margin-top: 12px;
-  font-size: 0.85rem;
-}
-
-/* SECTIONS */
-
-.hr-section h2 {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-}
-
-.hr-section-subtitle {
-  font-size: 0.95rem;
-  color: var(--hr-muted);
-  margin-bottom: 16px;
-}
-
-/* GRID HELPERS */
-
-.hr-grid-3 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-.hr-grid-2 {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-/* CARDS */
-
-.hr-card {
-  background: #ffffff;
-  border-radius: var(--hr-radius);
-  padding: 16px;
-  border: 1px solid var(--hr-border);
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
-  position: relative;
-}
-
-.hr-card h3 {
-  margin-top: 0;
-  margin-bottom: 6px;
-  font-size: 1.05rem;
-}
-
-.hr-card p {
-  font-size: 0.9rem;
-  color: var(--hr-muted);
-}
-
-.hr-card-list {
-  margin: 10px 0 16px;
-  padding-left: 18px;
-  font-size: 0.88rem;
-  color: var(--hr-muted);
-}
-
-.hr-card-list li + li {
-  margin-top: 4px;
-}
-
-.hr-card-tag {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 0.7rem;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--hr-primary-soft);
-  color: var(--hr-primary);
-}
-
-.hr-card-tag-live {
-  background: #dcfce7;
-  color: #15803d;
-}
-
-.hr-card-tag-soon {
-  background: #fef3c7;
-  color: #92400e;
-}
-
-/* STEPS */
-
-.hr-steps {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.hr-step {
-  background: #ffffff;
-  border-radius: var(--hr-radius);
-  padding: 14px;
-  border: 1px solid var(--hr-border);
-}
-
-.hr-step-number {
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  background: var(--hr-primary-soft);
-  color: var(--hr-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-/* IMPACT */
-
-.hr-impact-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin: 16px 0;
-}
-
-.hr-impact-stat {
-  background: #ffffff;
-  border-radius: var(--hr-radius);
-  padding: 12px;
-  border: 1px solid var(--hr-border);
-}
-
-.hr-impact-number {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
-.hr-impact-label {
-  font-size: 0.9rem;
-  color: var(--hr-muted);
-}
-
-.hr-quotes blockquote {
-  margin: 0;
-  padding: 12px 16px;
-  border-left: 3px solid var(--hr-primary);
-  background: #ffffff;
-  border-radius: var(--hr-radius);
-  font-size: 0.9rem;
-  color: var(--hr-text);
-}
-
-.hr-quotes span {
-  display: block;
-  margin-top: 6px;
-  font-size: 0.8rem;
-  color: var(--hr-muted);
-}
-
-/* PRICING */
-
-.hr-pricing-card {
-  text-align: left;
-}
-
-.hr-price {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin: 4px 0 8px;
-}
-
-.hr-badge-soon {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #92400e;
-  background: #fef3c7;
-  padding: 4px 8px;
-  border-radius: 999px;
-}
-
-/* FAQ */
-
-.hr-faq-item + .hr-faq-item {
-  margin-top: 12px;
-}
-
-.hr-faq-item h3 {
-  font-size: 1rem;
-  margin-bottom: 4px;
-}
-
-.hr-faq-item p {
-  font-size: 0.9rem;
-  color: var(--hr-muted);
-}
-
-/* FOOTER */
-
-.hr-footer {
-  border-top: 1px solid var(--hr-border);
-  background: #ffffff;
-  padding: 16px 0;
-  margin-top: 24px;
-}
-
-.hr-footer-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 0.85rem;
-  color: var(--hr-muted);
-}
-
-.hr-footer-links {
-  display: flex;
-  gap: 12px;
-}
-
-/* RESPONSIVE BREAKPOINTS */
-
-@media (min-width: 768px) {
-  .hr-header-inner {
-    padding: 12px 0;
-  }
-
-  .hr-nav-desktop {
-    display: flex;
-  }
-
-  .hr-nav-cta {
-    display: inline-flex;
-    margin-left: 16px;
-  }
-
-  .hr-nav-toggle {
-    display: none;
-  }
-
-  .hr-nav-mobile {
-    display: none !important;
-  }
-
-  .hr-hero-grid {
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
-  .hr-hero-text {
-    flex: 1.2;
-  }
-
-  .hr-hero-widget {
-    flex: 1;
-  }
-
-  .hr-hero-text h1 {
-    font-size: 2rem;
-  }
-
-  .hr-hero-ctas {
-    flex-direction: row;
-  }
-
-  .hr-grid-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .hr-grid-2 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .hr-steps {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .hr-impact-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .hr-footer-inner {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HealthRadar – Find NHS care faster</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hr-header">
+    <div class="hr-container hr-header-inner">
+      <div class="hr-logo">HealthRadar</div>
+      <nav class="hr-nav-desktop">
+        <a href="#how-it-works">How it works</a>
+        <a href="#radars">Radars</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <button class="hr-btn-ghost hr-nav-cta">Get dentist alerts</button>
+      <button class="hr-nav-toggle" aria-label="Toggle navigation">
+        ☰
+      </button>
+    </div>
+    <nav class="hr-nav-mobile" id="mobileNav">
+      <a href="#how-it-works">How it works</a>
+      <a href="#radars">Radars</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="#gpradar" class="hr-link-strong">Join GP waitlist</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hr-section hr-hero">
+      <div class="hr-container hr-hero-grid">
+        <div class="hr-hero-text">
+          <h1>Find NHS care faster — without endless calls or refreshing pages.</h1>
+          <p>
+            HealthRadar watches NHS service availability for you. Start with NHS
+            dentists via <strong>DentistRadar</strong>, and be first in line when
+            <strong>GPRadar</strong> and other radars go live.
+          </p>
+          <div class="hr-hero-ctas">
+            <a href="https://www.dentistradar.co.uk" class="hr-btn-primary">Find an NHS dentist</a>
+            <a href="#gpradar" class="hr-btn-ghost">Join GPRadar waitlist</a>
+          </div>
+          <p class="hr-hero-trust">
+            Built in the UK. Helping people access NHS care with fewer barriers.
+          </p>
+        </div>
+
+        <div class="hr-hero-widget">
+          <h2>Try a live dentist availability preview</h2>
+          <p class="hr-text-muted">
+            Enter your postcode to see how HealthRadar can check NHS dentists near you.
+          </p>
+          <form class="hr-form" id="dentistPreviewForm">
+            <label>
+              Postcode
+              <input type="text" name="postcode" placeholder="e.g. RG41" required />
+            </label>
+            <label>
+              Radius
+              <select name="radiusMiles">
+                <option value="5">Within 5 miles</option>
+                <option value="10" selected>Within 10 miles</option>
+                <option value="25">Within 25 miles</option>
+              </select>
+            </label>
+            <button type="submit" class="hr-btn-primary hr-btn-full">Check</button>
+          </form>
+          <div class="hr-preview-results" id="previewResults">
+            <!-- Inject dentist results here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RADARS -->
+    <section class="hr-section" id="radars">
+      <div class="hr-container">
+        <h2>Choose a radar for your needs</h2>
+        <p class="hr-section-subtitle">
+          HealthRadar watches specific NHS services so you don’t have to.
+        </p>
+        <div class="hr-grid-3">
+          <!-- DentistRadar card -->
+          <article class="hr-card">
+            <div class="hr-card-tag hr-card-tag-live">Live</div>
+            <h3>🦷 DentistRadar — NHS dentist alerts</h3>
+            <p>
+              Find NHS practices accepting new patients near you and get alerts when new openings appear.
+            </p>
+            <ul class="hr-card-list">
+              <li>Tailored to your postcode &amp; radius</li>
+              <li>We monitor changes for you</li>
+              <li>Get timely email alerts</li>
+            </ul>
+            <a href="https://www.dentistradar.co.uk" class="hr-btn-secondary hr-btn-full">
+              Use DentistRadar
+            </a>
+          </article>
+
+          <!-- GPRadar card -->
+          <article class="hr-card">
+            <div class="hr-card-tag hr-card-tag-soon">In development</div>
+            <h3>🩺 GPRadar — GP registration &amp; alerts</h3>
+            <p>
+              Track GP practices near you and be the first to know when new registration opportunities become available.
+            </p>
+            <ul class="hr-card-list">
+              <li>Enter your postcode &amp; radius</li>
+              <li>Join the early waitlist</li>
+              <li>Get alerts when opportunities emerge</li>
+            </ul>
+            <a href="#gpradar" class="hr-btn-secondary hr-btn-full">
+              Join GPRadar waitlist
+            </a>
+          </article>
+
+          <!-- Future radars card -->
+          <article class="hr-card">
+            <div class="hr-card-tag">Exploring</div>
+            <h3>🔍 Future radars</h3>
+            <p>
+              We’ll expand HealthRadar to include more NHS services based on real user demand — from A&amp;E to mental health and beyond.
+            </p>
+            <ul class="hr-card-list">
+              <li>Researching best data sources</li>
+              <li>Your feedback shapes priority</li>
+              <li>More radars to follow</li>
+            </ul>
+            <!-- Future: link to suggestion form -->
+            <button class="hr-btn-ghost hr-btn-full" disabled>Suggest a radar (soon)</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="hr-section" id="how-it-works">
+      <div class="hr-container">
+        <h2>How HealthRadar works</h2>
+        <div class="hr-steps">
+          <div class="hr-step">
+            <div class="hr-step-number">1</div>
+            <h3>Choose a service</h3>
+            <p>Select the radar you need (dentists now, GPs soon).</p>
+          </div>
+          <div class="hr-step">
+            <div class="hr-step-number">2</div>
+            <h3>Tell us your postcode</h3>
+            <p>Set how far you’re willing to travel.</p>
+          </div>
+          <div class="hr-step">
+            <div class="hr-step-number">3</div>
+            <h3>We watch public NHS data</h3>
+            <p>HealthRadar continuously checks for changes in availability.</p>
+          </div>
+          <div class="hr-step">
+            <div class="hr-step-number">4</div>
+            <h3>You get notified</h3>
+            <p>We email you when there’s something useful nearby.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPACT -->
+    <section class="hr-section hr-section-alt">
+      <div class="hr-container">
+        <h2>HealthRadar in action</h2>
+        <div class="hr-impact-grid">
+          <div class="hr-impact-stat">
+            <div class="hr-impact-number">2,000+</div>
+            <div class="hr-impact-label">people signed up for DentistRadar</div>
+          </div>
+          <div class="hr-impact-stat">
+            <div class="hr-impact-number">⏱️</div>
+            <div class="hr-impact-label">NHS practices scanned daily</div>
+          </div>
+          <div class="hr-impact-stat">
+            <div class="hr-impact-number">📬</div>
+            <div class="hr-impact-label">Alerts helping people across the UK</div>
+          </div>
+        </div>
+
+        <div class="hr-quotes">
+          <blockquote>
+            “I’d been trying for months. I finally managed to register with a dentist after your alert.”
+            <span>— DentistRadar user, UK</span>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="hr-section" id="pricing">
+      <div class="hr-container">
+        <h2>Simple pricing for everyone</h2>
+        <div class="hr-grid-2">
+          <article class="hr-card hr-pricing-card">
+            <h3>Free</h3>
+            <p class="hr-price">£0</p>
+            <ul class="hr-card-list">
+              <li>Access to DentistRadar alerts</li>
+              <li>Email notifications for NHS dentist availability</li>
+              <li>Priority access to GPRadar waitlist</li>
+            </ul>
+            <a href="https://www.dentistradar.co.uk" class="hr-btn-primary hr-btn-full">
+              Start free with DentistRadar
+            </a>
+          </article>
+
+          <article class="hr-card hr-pricing-card">
+            <h3>HealthRadar Plus <span class="hr-badge-soon">Coming soon</span></h3>
+            <p class="hr-price">TBC</p>
+            <ul class="hr-card-list">
+              <li>Faster alerts</li>
+              <li>Multiple postcodes &amp; family support</li>
+              <li>Early access to new radars</li>
+            </ul>
+            <a href="#gpradar" class="hr-btn-secondary hr-btn-full">
+              Join early access list
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GPRADAR WAITLIST -->
+    <section class="hr-section" id="gpradar">
+      <div class="hr-container">
+        <h2>Join the GPRadar waitlist</h2>
+        <p>
+          We’re building GPRadar for people stuck in GP registration limbo. Join the waitlist so we can
+          prioritise your area and keep you updated.
+        </p>
+        <form class="hr-form" id="gpWaitlistForm">
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Postcode (first part only)
+            <input type="text" name="postcodeArea" placeholder="e.g. RG41" required />
+          </label>
+          <label>
+            What are you struggling with? (optional)
+            <textarea name="struggle" rows="3" placeholder="Tell us a bit about your GP access situation"></textarea>
+          </label>
+          <button type="submit" class="hr-btn-primary hr-btn-full">Join the waitlist</button>
+          <p class="hr-text-muted">
+            We respect your privacy and won’t share your email or postcode.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="hr-section" id="faq">
+      <div class="hr-container">
+        <h2>Frequently asked questions</h2>
+        <div class="hr-faq-item">
+          <h3>What radars does HealthRadar include today?</h3>
+          <p>
+            Today, HealthRadar includes a live NHS dentist alert tool via DentistRadar. GPRadar is in development and you
+            can join the waitlist now. Future radars will be added based on demand.
+          </p>
+        </div>
+        <div class="hr-faq-item">
+          <h3>How do you use my location?</h3>
+          <p>
+            We only use your postcode to find nearby NHS services and send relevant alerts. We do not sell your data, and
+            you can ask us to delete it at any time.
+          </p>
+        </div>
+        <!-- Add more FAQ items here -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="hr-footer">
+    <div class="hr-container hr-footer-inner">
+      <p>© <span id="year"></span> HealthRadar. DentistRadar is part of HealthRadar.</p>
+      <div class="hr-footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="mailto:support@healthradar">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple mobile nav toggle
+    const navToggle = document.querySelector('.hr-nav-toggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (navToggle && mobileNav) {
+      navToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('hr-nav-mobile-open');
+      });
+    }
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
