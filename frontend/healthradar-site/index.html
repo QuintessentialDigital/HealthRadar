@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HealthRadar – Get NHS dentist alerts when practices actually open</title>
+  <title>HealthRadar – Get alerted the moment an NHS dentist near you opens</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Stop ringing around. Get a simple alert the moment an NHS dentist near you starts accepting new patients." />
+  <meta name="description" content="Stop calling around. Get a simple alert when an NHS dentist near you actually starts accepting new patients." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,20 +12,20 @@
   
   <style>
     :root {
-      --hr-page: #f3f4f6;
-      --hr-shell: #f9fafb;
-      --hr-surface: #ffffff;
-      --hr-primary: #2563eb;
-      --hr-primary-strong: #1d4ed8;
-      --hr-primary-soft: #eff6ff;
-      --hr-border: #e5e7eb;
-      --hr-border-strong: #cbd5f5;
-      --hr-text: #0f172a;
-      --hr-muted: #6b7280;
-      --hr-radius: 16px;
-      --hr-radius-sm: 12px;
-      --hr-shadow: 0 10px 30px rgba(15,23,42,0.08);
-      --hr-shadow-lg: 0 20px 50px rgba(15,23,42,0.12);
+      --page: #f3f4f6;
+      --shell: #f9fafb;
+      --surface: #ffffff;
+      --primary: #2563eb;
+      --primary-strong: #1d4ed8;
+      --primary-soft: #eff6ff;
+      --border: #e5e7eb;
+      --border-strong: #cbd5f5;
+      --text: #0f172a;
+      --muted: #6b7280;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 10px 30px rgba(15,23,42,0.08);
+      --shadow-lg: 0 20px 50px rgba(15,23,42,0.12);
       --accent-dentist: #0d9488;
       --accent-gp: #16a34a;
     }
@@ -33,9 +33,9 @@
     body {
       margin: 0;
       font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(to bottom, #e0ebff 0%, #f8f9ff 30%, #f3f4f6 100%);
-      color: var(--hr-text);
-      line-height: 1.5;
+      background: linear-gradient(to bottom, #e0ebff 0%, #f8f9ff 30%, var(--page) 100%);
+      color: var(--text);
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
     a { color: inherit; text-decoration: none; }
@@ -45,98 +45,30 @@
     header {
       position: sticky; top: 0; z-index: 50;
       backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.92);
-      border-bottom: 1px solid rgba(229,231,235,0.8);
+      background: rgba(255,255,255,0.94);
+      border-bottom: 1px solid rgba(229,231,235,0.7);
     }
     .header-inner {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 20px;
+      padding: 14px 20px;
     }
     .logo {
-      font-weight: 800; font-size: 1.35rem; letter-spacing: -0.5px;
+      font-weight: 800; font-size: 1.4rem; letter-spacing: -0.6px;
       display: flex; align-items: center; gap: 10px;
     }
     .logo-icon {
-      width: 32px; height: 32px;
-      background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb 50%, #1e3a8a);
+      width: 34px; height: 34px;
+      background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb 55%, #1e3a8a);
       border-radius: 50%;
       position: relative;
       box-shadow: 0 0 20px rgba(37,99,235,0.4);
     }
     .logo-icon::after {
-      content: ""; position: absolute; inset: 6px;
+      content: ""; position: absolute; inset: 7px;
       background: white; border-radius: 50%;
     }
-    .logo-health { color: var(--hr-text); }
-    .logo-radar { color: var(--hr-primary); }
+    .logo-health { color: var(--text); }
+    .logo-radar { color: var(--primary); }
 
-    /* HERO – drastically simplified */
-    .hero {
-      padding: 40px 0 60px;
-      text-align: center;
-    }
-    @media (min-width: 768px) {
-      .hero { text-align: left; padding: 60px 0 80px; }
-      .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    }
-    .hero-badge {
-      display: inline-flex; gap: 8px; align-items: center;
-      background: white; border: 1px solid var(--hr-border);
-      padding: 6px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 600;
-      box-shadow: var(--hr-shadow);
-    }
-    .hero-title {
-      font-size: 2.5rem; line-height: 1.15; margin: 16px 0 12px;
-      font-weight: 800; letter-spacing: -0.04em;
-    }
-    @media (min-width: 768px) { .hero-title { font-size: 3.2rem; } }
-    .hero-subtitle {
-      font-size: 1.15rem; color: var(--hr-muted); max-width: 560px; margin: 0 auto;
-    }
-    @media (min-width: 768px) { .hero-subtitle { margin: 0; } }
-
-    .trust-bar {
-      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
-      margin: 24px 0; font-size: 0.9rem; color: var(--hr-muted);
-    }
-    @media (min-width: 768px) { .trust-bar { justify-content: flex-start; } }
-    .trust-item strong { color: var(--hr-text); font-weight: 700; }
-
-    .cta-stack { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
-    @media (min-width: 480px) { .cta-stack { flex-direction: row; } }
-    .btn {
-      padding: 14px 24px; border-radius: 999px; font-weight: 600; font-size: 1rem;
-      text-align: center; transition: all 0.2s ease;
-    }
-    .btn-primary {
-      background: var(--hr-primary); color: white;
-      box-shadow: 0 10px 30px rgba(37,99,235,0.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(37,99,235,0.5); }
-    .btn-secondary {
-      background: white; border: 2px solid var(--hr-border-strong); color: var(--hr-text);
-    }
-    .btn-secondary:hover { border-color: var(--hr-primary); }
-
-    /* PREVIEW WIDGET – now feels like the real product */
-    .widget {
-      background: white; border-radius: var(--hr-radius); padding: 24px;
-      box-shadow: var(--hr-shadow-lg); border: 1px solid var(--hr-border);
-      height: fit-content;
-    }
-    .widget h3 { font-size: 1.25rem; margin-bottom: 8px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block; font-weight: 600; margin-bottom: 6px; font-size: 0.95rem;
-    }
-    .form-control {
-      width: 100%; padding: 12px 14px; border: 1px solid var(--hr-border);
-      border-radius: 10px; font-size: 1rem; background: white;
-    }
-    .results {
-      margin-top: 16px; padding: 12px; background: #f8f9ff; border-radius: 10px;
-      min-height: 80px; font-size: 0.95rem;
-    }
-
-    /* REST OF PAGE – condensed */
-   
+    /* HERO */
+    .hero { padding: 40
