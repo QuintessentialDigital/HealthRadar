@@ -38,7 +38,8 @@
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--hr-color-text);
-      background: var(--hr-color-bg);
+      /* subtle, modern gradient instead of flat grey */
+      background: radial-gradient(circle at top, #eff6ff 0, #f9fafb 45%, #f8fafc 100%);
       letter-spacing: 0.01em;
     }
 
@@ -221,15 +222,16 @@
     /* SECTIONS */
 
     .hr-section {
-      padding: 56px 0;
+      padding: 36px 0; /* tighter vertically */
     }
 
     .hr-section-alt {
-      background: #f1f5f9;
+      /* light gradient band instead of flat grey */
+      background: linear-gradient(135deg, #ecf4ff 0%, #f8fafc 50%, #edf2ff 100%);
     }
 
     .hr-section h2 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       margin-bottom: 8px;
       font-weight: 650;
       letter-spacing: -0.01em;
@@ -238,28 +240,28 @@
     .hr-section-subtitle {
       font-size: 0.95rem;
       color: var(--hr-color-muted);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       max-width: 640px;
     }
 
     /* HERO */
 
     .hr-hero {
-      padding-top: 32px;
-      padding-bottom: 48px;
+      padding-top: 28px;
+      padding-bottom: 32px;
       background: radial-gradient(circle at top right, #dbeafe 0, transparent 55%);
     }
 
     .hr-hero-grid {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
       position: relative;
       align-items: stretch;
     }
 
     .hr-hero-title {
-      font-size: 2rem;
+      font-size: 1.85rem;
       font-weight: 700;
       line-height: 1.25;
       letter-spacing: -0.02em;
@@ -267,21 +269,21 @@
     }
 
     .hr-hero-subtitle {
-      font-size: 1rem;
+      font-size: 0.98rem;
       color: var(--hr-color-muted);
       margin: 0;
       line-height: 1.5;
     }
 
     .hr-hero-ctas {
-      margin-top: 16px;
+      margin-top: 14px;
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
     .hr-hero-trust {
-      margin-top: 10px;
+      margin-top: 8px;
       font-size: 0.85rem;
       color: var(--hr-color-muted);
     }
@@ -290,11 +292,11 @@
       background: #ffffff;
       border-radius: 18px;
       box-shadow: var(--hr-shadow-soft);
-      padding: 16px;
+      padding: 14px 16px 16px;
     }
 
     .hr-hero-widget h2 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       margin-bottom: 6px;
     }
 
@@ -315,8 +317,8 @@
     .hr-form {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      margin-top: 12px;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     .hr-form label {
@@ -341,7 +343,7 @@
     }
 
     .hr-preview-results {
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 0.85rem;
       color: var(--hr-color-muted);
     }
@@ -374,21 +376,21 @@
     .hr-grid-3 {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
     .hr-grid-2 {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 14px;
     }
 
     /* CARDS */
 
     .hr-card {
-      background: #ffffff;
+      background: var(--hr-color-card);
       border-radius: var(--hr-radius);
-      padding: 18px 18px 20px;
+      padding: 16px 16px 18px;
       border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
       position: relative;
@@ -396,15 +398,15 @@
     }
 
     .hr-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.16);
       border-color: rgba(148, 163, 184, 0.7);
     }
 
     .hr-card h3 {
       margin-top: 0;
-      margin-bottom: 6px;
-      font-size: 1.05rem;
+      margin-bottom: 4px;
+      font-size: 1.02rem;
     }
 
     .hr-card p {
@@ -413,7 +415,7 @@
     }
 
     .hr-card-list {
-      margin: 10px 0 16px;
+      margin: 8px 0 14px;
       padding-left: 18px;
       font-size: 0.88rem;
       color: var(--hr-color-muted);
@@ -466,25 +468,25 @@
     .hr-steps {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      margin-top: 16px;
+      gap: 12px;
+      margin-top: 14px;
     }
 
     .hr-step {
       background: #ffffff;
       border-radius: var(--hr-radius);
-      padding: 14px;
+      padding: 12px 14px;
       border: 1px solid var(--hr-color-border);
     }
 
     .hr-step-icon {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin-bottom: 4px;
     }
 
     .hr-step-number {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 999px;
       background: #dbeafe;
       color: var(--hr-color-primary);
@@ -492,18 +494,18 @@
       align-items: center;
       justify-content: center;
       font-weight: 600;
-      margin-bottom: 6px;
-      font-size: 0.9rem;
+      margin-bottom: 4px;
+      font-size: 0.86rem;
     }
 
     .hr-step h3 {
       margin: 0 0 4px;
-      font-size: 0.97rem;
+      font-size: 0.95rem;
     }
 
     .hr-step p {
       margin: 0;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       color: var(--hr-color-muted);
     }
 
@@ -512,25 +514,25 @@
     .hr-impact-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
-      margin: 16px 0;
+      gap: 12px;
+      margin: 14px 0 12px;
     }
 
     .hr-impact-stat {
       background: #ffffff;
       border-radius: var(--hr-radius);
-      padding: 12px;
+      padding: 10px 12px;
       border: 1px solid var(--hr-color-border);
       text-align: left;
     }
 
     .hr-impact-icon {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       margin-bottom: 4px;
     }
 
     .hr-impact-number {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       margin-bottom: 2px;
     }
@@ -564,7 +566,7 @@
     }
 
     .hr-price {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       margin: 4px 0 8px;
     }
@@ -582,7 +584,7 @@
     /* FAQ */
 
     .hr-faq-item + .hr-faq-item {
-      margin-top: 12px;
+      margin-top: 10px;
     }
 
     .hr-faq-item h3 {
@@ -604,14 +606,14 @@
     }
 
     .hr-list li {
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     /* GPRADAR NEXT STEPS */
 
     .hr-next-steps h4 {
       font-size: 1rem;
-      margin-top: 20px;
+      margin-top: 16px;
       margin-bottom: 6px;
     }
 
@@ -631,21 +633,21 @@
     .hr-footer {
       border-top: 1px solid var(--hr-color-border);
       background: #ffffff;
-      padding: 16px 0;
-      margin-top: 24px;
+      padding: 14px 0;
+      margin-top: 20px;
     }
 
     .hr-footer-inner {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       font-size: 0.85rem;
       color: var(--hr-color-muted);
     }
 
     .hr-footer-links {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -687,7 +689,7 @@
       }
 
       .hr-hero-title {
-        font-size: 2.3rem;
+        font-size: 2.1rem;
       }
 
       .hr-hero-ctas {
@@ -698,7 +700,7 @@
         display: block;
         position: absolute;
         right: 5%;
-        top: 12%;
+        top: 10%;
       }
 
       .hr-grid-3 {
@@ -718,7 +720,7 @@
       }
 
       .hr-section {
-        padding: 72px 0;
+        padding: 48px 0; /* still tighter than before */
       }
 
       .hr-footer-inner {
