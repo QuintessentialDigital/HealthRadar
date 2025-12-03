@@ -24,8 +24,8 @@
       --hr-accent-gp: #16a34a;       /* green */
 
       /* Shared */
-      --hr-radius: 12px;
-      --hr-shadow-soft: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --hr-radius: 16px;
+      --hr-shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.08);
     }
 
     *,
@@ -39,6 +39,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--hr-color-text);
       background: var(--hr-color-bg);
+      letter-spacing: 0.01em;
     }
 
     a {
@@ -48,7 +49,7 @@
 
     .hr-container {
       width: 100%;
-      max-width: 1120px;
+      max-width: 1040px;
       margin: 0 auto;
       padding: 0 16px;
     }
@@ -67,7 +68,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px 4px;
+      padding: 10px 16px 10px;
     }
 
     .hr-logo-wrap {
@@ -100,6 +101,10 @@
       border: 1px solid rgba(37, 99, 235, 0.5);
     }
 
+    .hr-logo span:first-of-type {
+      color: var(--hr-color-text);
+    }
+
     .hr-logo span:last-child {
       color: var(--hr-color-primary);
     }
@@ -114,7 +119,7 @@
       display: none;
       gap: 16px;
       margin-left: 24px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
     }
 
     .hr-nav-desktop a {
@@ -170,27 +175,30 @@
       align-items: center;
       justify-content: center;
       border-radius: 999px;
-      padding: 10px 18px;
+      padding: 10px 20px;
       font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
       border: 1px solid transparent;
+      letter-spacing: 0.02em;
       transition: all 0.15s ease-out;
     }
 
     .hr-btn-primary {
       background: var(--hr-color-primary);
       color: white;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
     }
 
     .hr-btn-primary:hover {
       background: #1d4ed8;
       transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.45);
     }
 
     .hr-btn-secondary {
       background: #ffffff;
-      border-color: var(--hr-color-border);
+      border-color: rgba(148, 163, 184, 0.8);
       color: var(--hr-color-text);
     }
 
@@ -213,7 +221,7 @@
     /* SECTIONS */
 
     .hr-section {
-      padding: 40px 0;
+      padding: 56px 0;
     }
 
     .hr-section-alt {
@@ -221,21 +229,25 @@
     }
 
     .hr-section h2 {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       margin-bottom: 8px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
     }
 
     .hr-section-subtitle {
       font-size: 0.95rem;
       color: var(--hr-color-muted);
       margin-bottom: 16px;
+      max-width: 640px;
     }
 
     /* HERO */
 
     .hr-hero {
-      padding-top: 24px;
-      background: radial-gradient(circle at top right, #dbeafe 0, transparent 60%);
+      padding-top: 32px;
+      padding-bottom: 48px;
+      background: radial-gradient(circle at top right, #dbeafe 0, transparent 55%);
     }
 
     .hr-hero-grid {
@@ -243,19 +255,22 @@
       flex-direction: column;
       gap: 24px;
       position: relative;
+      align-items: stretch;
     }
 
     .hr-hero-title {
-      font-size: 1.9rem;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 1.25;
+      letter-spacing: -0.02em;
       margin: 0 0 8px;
     }
 
     .hr-hero-subtitle {
-      font-size: 1.02rem;
+      font-size: 1rem;
       color: var(--hr-color-muted);
       margin: 0;
+      line-height: 1.5;
     }
 
     .hr-hero-ctas {
@@ -273,7 +288,7 @@
 
     .hr-hero-widget {
       background: #ffffff;
-      border-radius: var(--hr-radius);
+      border-radius: 18px;
       box-shadow: var(--hr-shadow-soft);
       padding: 16px;
     }
@@ -292,6 +307,7 @@
       width: 120px;
       opacity: 0.6;
       display: none;
+      font-size: 3rem;
     }
 
     /* FORMS */
@@ -372,17 +388,17 @@
     .hr-card {
       background: #ffffff;
       border-radius: var(--hr-radius);
-      padding: 16px;
-      border: 1px solid var(--hr-color-border);
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
       position: relative;
       transition: all 0.2s ease-out;
     }
 
     .hr-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
-      border-color: var(--hr-color-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+      border-color: rgba(148, 163, 184, 0.7);
     }
 
     .hr-card h3 {
@@ -496,7 +512,7 @@
     .hr-impact-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
       margin: 16px 0;
     }
 
@@ -505,6 +521,7 @@
       border-radius: var(--hr-radius);
       padding: 12px;
       border: 1px solid var(--hr-color-border);
+      text-align: left;
     }
 
     .hr-impact-icon {
@@ -513,8 +530,9 @@
     }
 
     .hr-impact-number {
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 700;
+      margin-bottom: 2px;
     }
 
     .hr-impact-label {
@@ -635,7 +653,7 @@
 
     @media (min-width: 768px) {
       .hr-header-inner {
-        padding: 10px 0 6px;
+        padding: 10px 0 10px;
       }
 
       .hr-nav-desktop {
@@ -669,7 +687,7 @@
       }
 
       .hr-hero-title {
-        font-size: 2.1rem;
+        font-size: 2.3rem;
       }
 
       .hr-hero-ctas {
@@ -699,10 +717,18 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
+      .hr-section {
+        padding: 72px 0;
+      }
+
       .hr-footer-inner {
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+      }
+
+      .hr-tagline {
+        display: block;
       }
     }
 
@@ -794,9 +820,8 @@
           </div>
         </div>
 
-        <!-- Optional simple hero illustration -->
+        <!-- Simple placeholder illustration -->
         <div class="hr-hero-illustration" aria-hidden="true">
-          <!-- Simple radar emoji / placeholder; replace with SVG later if you like -->
           📡
         </div>
       </div>
@@ -1138,7 +1163,7 @@
 
         try {
           const res = await fetch('/api/radar/dentist/preview', {
-            method: 'POST', // change to 'GET' + query params if your API is GET-based
+            method: 'POST', // change to GET + query params if needed
             headers: {
               'Content-Type': 'application/json'
             },
