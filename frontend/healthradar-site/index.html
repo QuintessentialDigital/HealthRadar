@@ -121,8 +121,8 @@
       font-size:19px;color:var(--gray-700);margin-bottom:40px;
     }
     .trust{
-      display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:48px 0;
-      text-align:center;font-size:15px;
+      display:grid;grid-template-columns:1fr;gap:24px;margin:48px 0;
+      font-size:15px;text-align:left;
     }
     .trust strong{
       font-size:28px;font-weight:900;color:var(--gray-900);display:block;
@@ -225,12 +225,14 @@
       .hero-grid{grid-template-columns:1fr 460px;gap:80px;}
       .hero h1{font-size:60px;}
       .widget{padding:48px;}
+      .trust{grid-template-columns:repeat(3,1fr);}
+      .steps{grid-template-columns:repeat(2,1fr);}
     }
     @media (min-width:1024px){
       .container{padding:0 32px;}
       .nav-links{display:flex;}
       .grid-3{grid-template-columns:repeat(3,1fr);}
-      .steps{grid-template-columns:repeat(4,1fr);text-align:center;}
+      .steps{grid-template-columns:repeat(4,1fr);}
       .testimonials{grid-template-columns:repeat(3,1fr);}
       .footer-links a{display:inline;margin:0 24px;margin-bottom:0;}
     }
@@ -356,9 +358,93 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS + SOCIAL PROOF + GPRADAR WAITLIST + FOOTER -->
-  <!-- (All remaining sections are identical to the previous version but now fully mobile-responsive) -->
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="container">
+      <h2 class="section-title">How HealthRadar works</h2>
+      <p class="section-subtitle">We do the watching. You just act when the time is right.</p>
 
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>You set your location</h3>
+          <p>Postcode + travel radius</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>We monitor public data</h3>
+          <p>NHS directories, CQC, practice sites</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>You get one clear alert</h3>
+          <p>The moment capacity opens</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>You register immediately</h3>
+          <p>Before spaces disappear</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section class="section section-alt">
+    <div class="container">
+      <h2 class="section-title">It’s already changing lives</h2>
+      <p class="section-subtitle">Real stories from DentistRadar users</p>
+
+      <div class="testimonials">
+        <div class="testimonial">
+          “Tried for 22 months. Got an alert on Tuesday, registered Wednesday morning. Thank you.”
+          <div class="testimonial-author">— Sarah, Manchester</div>
+        </div>
+        <div class="testimonial">
+          “My kids hadn’t seen a dentist in 3 years. One alert and we’re all registered now.”
+          <div class="testimonial-author">— James, Bristol</div>
+        </div>
+        <div class="testimonial">
+          “I was pulling my own tooth with pliers. Your alert saved me.”
+          <div class="testimonial-author">— Anon, Leeds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GPRADAR WAITLIST -->
+  <section class="section" id="gpradar">
+    <div class="container" style="max-width:760px;">
+      <h2 class="section-title">GPRadar — launching Q1 2026</h2>
+      <p class="section-subtitle">
+        Help us launch in your region first. Join the priority waitlist and we’ll open GPRadar where demand is highest.
+      </p>
+
+      <form id="gpWaitlistForm" style="background:white;padding:40px;border-radius:var(--radius);box-shadow:var(--shadow-lg);">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Postcode area (e.g. M1, SW1, RG41)</label>
+          <input type="text" class="form-control" placeholder="M1" required>
+        </div>
+        <div class="form-group">
+          <label>Optional: How long have you been trying to register with a GP?</label>
+          <textarea class="form-control" rows="4" placeholder="e.g. 18 months, moved here recently..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">
+          Join GPRadar priority waitlist
+        </button>
+        <p style="text-align:center;margin-top:20px;color:var(--gray-600);font-size:15px;">
+          Zero spam. Only launch updates from the team.
+        </p>
+      </form>
+      <div id="gpWaitlistMessage" style="text-align:center;margin-top:32px;font-size:20px;font-weight:700;"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-logo">
@@ -382,6 +468,16 @@
       document.getElementById('gpWaitlistMessage').innerHTML = 
         '<span style="color:#10b981;">Thank you — you’re on the GPRadar priority list!</span>';
       this.reset();
+    });
+
+    // Smooth scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
     });
   </script>
 </body>
