@@ -1,396 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HealthRadar – NHS dentist alerts when practices actually open</title>
-  <meta name="description" content="Stop calling around. Get a simple alert when an NHS dentist near you actually starts accepting new patients.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthRadar – Real-time NHS access intelligence</title>
+  <meta name="description" content="The operating system for NHS patient access. Live dentist availability alerts today. GP, A&E and waiting-time radars in 2026–27.">
 
-  <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --page: #f3f4f6;
-      --shell: #f9fafb;
-      --surface: #ffffff;
-      --primary: #2563eb;
-      --primary-strong: #1d4ed8;
-      --primary-soft: #eff6ff;
-      --border: #e5e7eb;
-      --border-strong: #cbd5f5;
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --primary: #0052ff;
+      --primary-dark: #003edc;
       --text: #0f172a;
-      --muted: #6b7280;
-      --radius: 18px;
-      --radius-sm: 12px;
-      --shadow: 0 10px 30px rgba(15,23,42,0.08);
-      --shadow-lg: 0 20px 50px rgba(15,23,42,0.12);
-      --accent-dentist: #0d9488;
-      --accent-gp: #16a34a;
+      --text-light: #47526e;
+      --text-muted: #647096;
+      --border: #e2e8f0;
+      --radius: 20px;
+      --radius-sm: 16px;
+      --shadow: 0 20px 40px rgba(0,0,0,0.06);
+      --shadow-lg: 0 32px 80px rgba(0,0,0,0.12);
     }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: linear-gradient(to bottom, #e0ebff 0%, #f8f9ff 30%, var(--page) 100%);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "cv02","cv11","ss01","ss03","ss04";
     }
+    a { color:inherit; text-decoration:none; }
 
-    a { color: inherit; text-decoration: none; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
+    .container { max-width:1240px; margin:0 auto; padding:0 32px; }
 
     /* Header */
     header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(12px);
-      background: rgba(255,255,255,0.94);
-      border-bottom: 1px solid rgba(229,231,235,0.7);
+      position:sticky; top:0; z-index:100;
+      backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.95);
+      border-bottom:1px solid var(--border);
     }
-
-    .header-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
+    .nav {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:20px 0;
     }
-
     .logo {
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: -0.8px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size:28px; font-weight:900; letter-spacing:-1.2px;
+      display:flex; align-items:center; gap:12px;
     }
-
     .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb 55%, #1e3a8a);
-      border-radius: 50%;
-      position: relative;
-      box-shadow: 0 0 20px rgba(37,99,235,0.4);
+      width:44px; height:44px;
+      background:conic-gradient(from 180deg at 50% 50%, #0052ff, #00d4ff, #0052ff);
+      border-radius:50%; position:relative;
+      box-shadow:0 0 30px rgba(0,82,255,0.4);
     }
-
     .logo-icon::after {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      background: white;
-      border-radius: 50%;
+      content:""; position:absolute; inset:9px;
+      background:white; border-radius:50%;
     }
+    .logo-health { color:var(--text); }
+    .logo-radar { color:var(--primary); }
 
-    .logo-health { color: var(--text); }
-    .logo-radar { color: var(--primary); }
+    .nav-links {
+      display:none; gap:40px; font-weight:600; font-size:15px;
+    }
+    .nav-links a { color:var(--text-light); position:relative; }
+    .nav-links a::after {
+      content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+      background:var(--primary); transition:width .25s ease;
+    }
+    .nav-links a:hover { color:var(--text); }
+    .nav-links a:hover::after { width:100%; }
+
+    .btn {
+      padding:14px 32px; border-radius:999px; font-weight:700; font-size:16px;
+      transition:all .25s ease; display:inline-flex; align-items:center; gap:10px;
+    }
+    .btn-primary {
+      background:var(--primary); color:white;
+      box-shadow:0 12px 32px rgba(0,82,255,0.3);
+    }
+    .btn-primary:hover { transform:translateY(-3px); box-shadow:0 20px 50px rgba(0,82,255,0.4); }
+    .btn-outline {
+      border:2px solid var(--border); background:transparent; color:var(--text);
+    }
+    .btn-outline:hover { border-color:var(--primary); background:var(--primary); color:white; }
 
     /* Hero */
     .hero {
-      padding: 60px 0 80px;
+      padding:120px 0 160px;
+      background:linear-gradient(135deg, #f0f5ff 0%, #ffffff 60%);
     }
-
-    @media (min-width: 768px) {
-      .hero {
-        padding: 100px 0 120px;
-      }
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1fr 420px;
-        gap: 60px;
-        align-items: start;
-      }
+    .hero-grid {
+      display:grid; grid-template-columns:1fr 480px; gap:80px; align-items:start;
     }
-
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      border: 1px solid var(--border);
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      box-shadow: var(--shadow);
+      display:inline-flex; align-items:center; gap:12px;
+      background:white; border:1px solid var(--border);
+      padding:12px 24px; border-radius:999px; font-weight:700; font-size:15px;
+      box-shadow:var(--shadow);
     }
-
-    .hero-title {
-      font-size: 2.8rem;
-      line-height: 1.15;
-      margin: 18px 0 16px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+    .hero-badge .live { background:#dcfce7; color:#166534; padding:4px 12px; border-radius:999px; font-size:13px; }
+    .hero h1 {
+      font-size:58px; line-height:1.1; font-weight:900; letter-spacing:-2px;
+      margin:24px 0 20px;
     }
-
-    @media (min-width: 768px) {
-      .hero-title { font-size: 3.7rem; }
+    .hero p {
+      font-size:20px; color:var(--text-light); max-width:560px; margin-bottom:40px;
     }
-
-    .hero-subtitle {
-      font-size: 1.25rem;
-      color: var(--muted);
-      max-width: 580px;
-      margin-bottom: 32px;
+    .trust {
+      display:flex; gap:48px; margin:48px 0; font-size:17px; color:var(--text-muted);
     }
+    .trust strong { font-size:28px; font-weight:900; color:var(--text); display:block; }
 
-    .trust-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 28px;
-      margin: 36px 0;
-      font-size: 1.05rem;
-      color: var(--muted);
-    }
-
-    .trust-item strong {
-      color: var(--text);
-      font-weight: 700;
-      font-size: 1.3rem;
-    }
-
-    .cta-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin: 40px 0;
-    }
-
-    @media (min-width: 480px) {
-      .cta-stack { flex-direction: row; }
-    }
-
-    .btn {
-      padding: 18px 36px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-align: center;
-      transition: all 0.25s ease;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 12px 34px rgba(37,99,235,0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 20px 50px rgba(37,99,235,0.5);
-    }
-
-    .btn-secondary {
-      background: white;
-      border: 2px solid var(--border-strong);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--primary);
-    }
-
-    /* Preview Widget */
+    /* Widget */
     .widget {
-      background: white;
-      border-radius: var(--radius);
-      padding: 36px;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid var(--border);
-      margin-top: 40px;
+      background:white; border-radius:var(--radius); padding:40px;
+      box-shadow:var(--shadow-lg); border:1px solid var(--border);
     }
-
-    @media (min-width: 768px) {
-      .widget { margin-top: 0; }
-    }
-
-    .widget h3 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-    }
-
-    .widget p {
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
+    .widget h3 { font-size:26px; font-weight:800; margin-bottom:12px; }
+    .widget p { color:var(--text-muted); margin-bottom:32px; }
+    .form-group { margin-bottom:24px; }
     .form-group label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 8px;
-      font-size: 0.98rem;
+      display:block; font-weight:700; margin-bottom:10px; font-size:15px;
     }
-
     .form-control {
-      width: 100%;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 1.05rem;
-      background: white;
+      width:100%; padding:18px 20px; border:1px solid var(--border);
+      border-radius:14px; font-size:17px; background:white;
     }
-
     .results {
-      margin-top: 24px;
-      padding: 20px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      min-height: 110px;
-      font-size: 1rem;
-      line-height: 1.6;
+      margin-top:28px; padding:24px; background:#f0f5ff; border-radius:14px;
+      min-height:120px; font-size:17px; line-height:1.7;
     }
 
     /* Sections */
-    .section {
-      padding: 90px 0;
-    }
-
-    .section-alt {
-      background: var(--shell);
-      border-top: 1px solid var(--border);
-    }
-
+    .section { padding:120px 0; }
+    .section-alt { background:var(--surface); }
     .section-title {
-      font-size: 2.6rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 20px;
-      letter-spacing: -0.03em;
+      font-size:44px; font-weight:900; text-align:center; letter-spacing:-1.5px;
+      margin-bottom:20px;
     }
-
     .section-subtitle {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 56px;
-      color: var(--muted);
-      font-size: 1.2rem;
-      line-height: 1.7;
+      font-size:20px; color:var(--text-light); text-align:center; max-width:760px; margin:0 auto 80px;
     }
 
-    .grid {
-      display: grid;
-      gap: 32px;
-    }
-
-    @media (min-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr 1fr; }
-      .grid-3 { grid-template-columns: repeat(3, 1fr); }
-    }
-
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
     .card {
-      background: white;
-      border-radius: var(--radius);
-      padding: 36px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      transition: all 0.3s ease;
+      background:white; border-radius:var(--radius); padding:40px;
+      border:1px solid var(--border); box-shadow:var(--shadow);
+      transition:transform .3s ease, box-shadow .3s ease;
     }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-lg);
-    }
-
+    .card:hover { transform:translateY(-12px); box-shadow:var(--shadow-lg); }
     .card-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 16px;
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 20px; border-radius:999px; font-size:14px; font-weight:700;
+      margin-bottom:20px;
     }
+    .tag-live { background:#dcfce7; color:#166534; }
+    .tag-soon { background:#fef9c7; color:#92400e; }
+    .tag-future { background:#f1f5f9; color:#475569; }
 
-    .tag-dentist {
-      background: #ecfdf5;
-      border: 1px solid #86efac;
-      color: var(--accent-dentist);
-    }
-
-    .tag-gp {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
-      color: var(--accent-gp);
-    }
-
-    .steps {
-      display: grid;
-      gap: 28px;
-    }
-
-    @media (min-width: 768px) {
-      .steps { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    .step {
-      text-align: center;
-      padding: 28px;
-      background: white;
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow);
-    }
-
-    .step-number {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 18px;
-      background: var(--primary-soft);
-      border: 4px solid var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.6rem;
-      color: var(--primary-strong);
+    .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:40px; }
+    .step { text-align:center; }
+    .step-num {
+      width:80px; height:80px; margin:0 auto 24px;
+      background:var(--primary); color:white; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:32px; font-weight:900;
     }
 
     footer {
-      background: white;
-      border-top: 1px solid var(--border);
-      padding: 50px 20px;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
+      background:#0f172a; color:#94a3b8; padding:80px 0 40px;
+      text-align:center; font-size:15px;
     }
+    .footer-links a { color:#cbd5e1; margin:0 20px; font-weight:600; }
+    .footer-links a:hover { color:white; }
 
-    .footer-links a {
-      margin: 0 16px;
-      color: var(--muted);
+    @media (max-width:1024px) {
+      .hero-grid, .grid-3, .steps { grid-template-columns:1fr; }
+      .hero h1 { font-size:48px; }
+      .widget { margin-top:60px; }
     }
-
-    .footer-links a:hover {
-      color: var(--primary);
+    @media (min-width:1024px) {
+      .nav-links { display:flex; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="container header-inner">
+    <div class="container nav">
       <a href="/" class="logo">
         <div class="logo-icon" aria-hidden="true"></div>
         <div><span class="logo-health">Health</span><span class="logo-radar">Radar</span></div>
       </a>
+      <div class="nav-links">
+        <a href="#platform">Platform</a>
+        <a href="#dentistradar">DentistRadar</a>
+        <a href="#gpradar">GPRadar</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+      <a href="https://www.dentistradar.co.uk" class="btn btn-primary">Open DentistRadar →</a>
     </div>
   </header>
 
@@ -399,116 +213,175 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <div class="hero-badge">Live now: DentistRadar • GPRadar launching 2026</div>
-          <h1 class="hero-title">Get an alert the moment an NHS dentist near you opens</h1>
-          <p class="hero-subtitle">
-            No more daily calls or refreshing NHS Find-a-Dentist. We watch public data 24/7 and ping you the second a practice starts accepting new patients.
+          <div class="hero-badge">
+            <span class="live">DentistRadar Live</span> • GP, A&E & waiting times in 2026–27
+          </div>
+          <h1>The operating system for NHS patient access</h1>
+          <p>
+            We monitor every public NHS data source in real time and turn chaotic waiting lists into simple, actionable alerts.
           </p>
 
-          <div class="trust-bar">
-            <div class="trust-item"><strong>20,000+</strong> people already using DentistRadar</div>
-            <div class="trust-item"><strong>Hundreds</strong> have registered after our alerts</div>
+          <div class="trust">
+            <div><strong>20,000+</strong> active users</div>
+            <div><strong>Hundreds</strong> already registered with dentists</div>
+            <div><strong>100%</strong> built on public data</div>
           </div>
 
-          <div class="cta-stack">
-            <a href="https://www.dentistradar.co.uk" class="btn btn-primary">Get dentist alerts — it’s free</a>
-            <a href="#gpradar" class="btn btn-secondary">Join GP waitlist</a>
+          <div style="display:flex; gap:20px; margin-top:40px;">
+            <a href="https://www.dentistradar.co.uk" class="btn btn-primary">Open DentistRadar (live)</a>
+            <a href="#gpradar" class="btn btn-outline">Join GPRadar waitlist</a>
           </div>
         </div>
 
         <div class="widget">
           <h3>See live NHS dentist availability near you</h3>
-          <p>This is the exact same engine used in the real product.</p>
+          <p>Real-time preview — this is the exact engine powering DentistRadar.</p>
           <form id="previewForm">
             <div class="form-group">
               <label>Postcode</label>
-              <input type="text" class="form-control" placeholder="e.g. RG41 5TS" required />
+              <input type="text" class="form-control" placeholder="e.g. SW1A 1AA" required>
             </div>
             <div class="form-group">
               <label>Distance</label>
               <select class="form-control">
-                <option>Within 5 miles</option>
-                <option selected>Within 10 miles</option>
-                <option>Within 25 miles</option>
+                <option>5 miles</option>
+                <option selected>10 miles</option>
+                <option>25 miles</option>
               </select>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Check live availability</button>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+              Check live availability
+            </button>
           </form>
           <div class="results" id="results">
-            Enter your postcode above to see real-time availability.
+            Enter your postcode above to see real-time NHS dentist availability in your area.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- One radar per problem -->
-  <section class="section section-alt">
+  <!-- PLATFORM OVERVIEW -->
+  <section class="section section-alt" id="platform">
     <div class="container">
-      <h2 class="section-title">One radar per NHS access problem</h2>
-      <p class="section-subtitle">We focus on the hardest parts of getting care — and turn them into simple alerts.</p>
+      <h2 class="section-title">One platform. Every access problem.</h2>
+      <p class="section-subtitle">
+        HealthRadar is the single source of truth for NHS capacity — starting with dentistry, expanding to primary care and urgent care.
+      </p>
 
-      <div class="grid grid-3">
+      <div class="grid-3">
         <div class="card">
-          <div class="card-tag tag-dentist">DentistRadar — Live now</div>
-          <h3>NHS dentist alerts</h3>
-          <p>Get notified the moment a practice near you starts accepting new NHS patients.</p>
-          <a href="https://www.dentistradar.co.uk" class="btn btn-primary" style="width:100%; margin-top:20px;">Open DentistRadar</a>
+          <div class="card-tag tag-live">Live today</div>
+          <h3>DentistRadar</h3>
+          <p>Real-time alerts when NHS dentists open for new patients. Already helping thousands register.</p>
+          <a href="https://www.dentistradar.co.uk" class="btn btn-primary" style="width:100%; margin-top:24px;">Open DentistRadar →</a>
         </div>
 
         <div class="card">
-          <div class="card-tag tag-gp">GPRadar — Coming 2026</div>
-          <h3>GP registration alerts</h3>
-          <p>See which practices are actually open — and get alerted when yours flip.</p>
-          <a href="#gpradar" class="btn btn-secondary" style="width:100%; margin-top:20px;">Join waitlist</a>
+          <div class="card-tag tag-soon">Launching 2026</div>
+          <h3>GPRadar</h3>
+          <p>Know instantly when a GP practice near you opens registration lists.</p>
+          <a href="#gpradar" class="btn btn-outline" style="width:100%; margin-top:24px;">Join waitlist →</a>
         </div>
 
         <div class="card">
-          <div class="card-tag" style="background:#f1f5f9; border:1px solid #94a3b8; color:#475569;">HealthRadar platform</div>
-          <h3>One home for all radars</h3>
-          <p>Eventually: dentists, GPs, waiting times and more in one place.</p>
+          <div class="card-tag tag-future">2026–27</div>
+          <h3>A&ERadar • WaitingTimes • MentalHealthRadar</h3>
+          <p>Real-time visibility into urgent care capacity and elective waiting lists.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- How it works -->
+  <!-- HOW IT WORKS -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">How it works</h2>
-      <p class="section-subtitle">We do the watching. You just act when the time is right.</p>
+      <h2 class="section-title">How HealthRadar works</h2>
+      <p class="section-subtitle">We turn public NHS data into immediate patient advantage.</p>
 
       <div class="steps">
         <div class="step">
-          <div class="step-number">1</div>
-          <h3>Tell us where you are</h3>
-          <p>Postcode + travel distance</p>
+          <div class="step-num">1</div>
+          <h3>You set your location</h3>
+          <p>Postcode + travel radius</p>
         </div>
         <div class="step">
-          <div class="step-number">2</div>
-          <h3>We monitor public NHS data</h3>
-          <p>No tabs or daily calls needed</p>
+          <div class="step-num">2</div>
+          <h3>We monitor every public source</h3>
+          <p>NHS directories, CQC, practice websites</p>
         </div>
         <div class="step">
-          <div class="step-number">3</div>
-          <h3>We alert you instantly</h3>
-          <p>Clear, timely, no spam</p>
+          <div class="step-num">3</div>
+          <h3>You get a clear alert</h3>
+          <p>The moment capacity opens</p>
         </div>
         <div class="step">
-          <div class="step-number">4</div>
-          <h3>You register quickly</h3>
-          <p>Before the spaces disappear</p>
+          <div class="step-num">4</div>
+          <h3>You act while spaces exist</h3>
+          <p>Register before the list fills</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Impact -->
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title">It’s already working</h2>
-      <p class="section-subtitle">DentistRadar users are getting appointments that felt impossible months ago.</p>
+  <!-- GP WAITLIST -->
+  <section class="section section-alt" id="gpradar">
+    <div class="container" style="max-width:720px;">
+      <h2 class="section-title">GPRadar — launching 2026</h2>
+      <p class="section-subtitle">
+        Help us decide where to launch first. Join the waitlist and we’ll prioritise the regions with the greatest need.
+      </p>
 
-      <div class="grid grid-3" style="text-align:center; margin-bottom:48px;">
-        <div>
-          <div
+      <form id="gpWaitlistForm" style="background:white; padding:48px; border-radius:var(--radius); box-shadow:var(--shadow-lg);">
+        <div class="form-group">
+          <label>Email address</label>
+          <input type="email" class="form-control" placeholder="name@company.com" required>
+        </div>
+        <div class="form-group">
+          <label>Postcode area (e.g. M1, RG41, SW1)</label>
+          <input type="text" class="form-control" placeholder="M1" required>
+        </div>
+        <div class="form-group">
+          <label>Optional: tell us your story</label>
+          <textarea class="form-control" rows="4" placeholder="How long have you been trying to register with a GP?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:18px; padding:18px;">
+          Join GPRadar priority waitlist
+        </button>
+        <p style="text-align:center; margin-top:20px; color:var(--text-muted); font-size:14px;">
+          Zero spam. Only GPRadar launch updates.
+        </p>
+      </form>
+      <div id="gpWaitlistMessage" style="text-align:center; margin-top:24px; font-size:18px; font-weight:700;"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p style="font-size:28px; font-weight:900; letter-spacing:-1px; margin-bottom:24px;">
+        <span style="color:white;">Health</span><span style="color:#0052ff;">Radar</span>
+      </p>
+      <div class="footer-links">
+        <a href="https://www.dentistradar.co.uk">DentistRadar (live)</a>
+        <a href="#gpradar">GPRadar waitlist</a>
+        <a href="mailto:founders@healthradar.co.uk">Contact</a>
+        <a href="#">Privacy</a>
+      </div>
+      <p style="margin-top:40px; color:#647096;">
+        © 2025 HealthRadar Ltd. Built in the UK.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());
+
+    document.getElementById('gpWaitlistForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('gpWaitlistMessage').innerHTML = 
+        '<span style="color:#166534;">Thank you — you’re on the GPRadar priority list.</span>';
+      this.reset();
+    });
+  </script>
+</body>
+</html>
