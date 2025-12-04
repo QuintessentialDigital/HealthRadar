@@ -300,14 +300,20 @@
           <form id="previewForm">
             <div class="form-group">
               <label>Postcode</label>
-              <input type="text" class="form-control" placeholder="e.g. M1 1AA" required>
+              <input
+                type="text"
+                class="form-control"
+                name="postcode"
+                placeholder="e.g. M1 1AA"
+                required
+              >
             </div>
             <div class="form-group">
               <label>Distance</label>
-              <select class="form-control">
-                <option>5 miles</option>
-                <option selected>10 miles</option>
-                <option>25 miles</option>
+              <select class="form-control" name="radiusMiles">
+                <option value="5">5 miles</option>
+                <option value="10" selected>10 miles</option>
+                <option value="25">25 miles</option>
               </select>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;">
@@ -444,6 +450,16 @@
     </div>
   </section>
 
+  <!-- ROADMAP ANCHOR (empty for now, but keeps nav link valid) -->
+  <section class="section section-alt" id="roadmap">
+    <div class="container">
+      <h2 class="section-title">Roadmap</h2>
+      <p class="section-subtitle">
+        DentistRadar is live today. GPRadar launches Q1 2026, with additional radars (A&E, waiting times, mental health) planned through 2026–2027.
+      </p>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="container">
@@ -463,20 +479,117 @@
   </footer>
 
   <script>
+    // 1. Wire up the live DentistRadar preview widget to real backend data
+    const previewForm = document.getElementById('previewForm');
+    const resultsBox = document.getElementById('results');
+
+    if (previewForm && resultsBox) {
+      previewForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(previewForm);
+        const postcode = (formData.get('postcode') || '').trim();
+        const radiusMiles = (formData.get('radiusMiles') || '10').toString();
+
+        if (!postcode) {
+          resultsBox.innerHTML = '<span style="color:#b91c1c;">Please enter a postcode.</span>';
+          return;
+        }
+
+        resultsBox.innerHTML = 'Checking live availability…';
+
+        try {
+          const params = new URLSearchParams({
+            postcode,
+            radiusMiles
+          });
+
+          // Call the backend you tested before
+          const res = await fetch(
+            'https://healthradar-nw8g.onrender.com/api/radar/dentist/preview?' + params.toString(),
+            {
+              method: 'GET'
+            }
+          );
+
+          if (!res.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await res.json();
+
+          if (!data.ok) {
+            resultsBox.innerHTML =
+              '<span style="color:#b91c1c;">' +
+              (data.error || 'No availability found right now. Try a different distance or check back later.') +
+              '</span>';
+            return;
+          }
+
+          const practices = data.practices || data.results || [];
+
+          if (!practices.length) {
+            resultsBox.innerHTML =
+              'No accepting NHS dentists found in this radius right now.<br>' +
+              'You can still use DentistRadar to get an alert as soon as this changes.';
+            return;
+          }
+
+          const itemsHtml = practices.slice(0, 6).map(p => {
+            const name = p.name || 'NHS dental practice';
+            const town = p.town || p.city || '';
+            const postcodeText = p.postcode || '';
+            const rawDist = p.distanceMiles || p.distance || null;
+            const distance =
+              rawDist != null
+                ? (rawDist.toFixed ? rawDist.toFixed(1) : rawDist) + ' miles away'
+                : '';
+
+            const meta = [town, postcodeText, distance].filter(Boolean).join(' · ');
+
+            return `
+              <div style="padding:10px 0;border-bottom:1px solid #e5e7eb;">
+                <div style="font-weight:700;font-size:16px;">${name}</div>
+                ${meta ? `<div style="font-size:14px;color:#64748b;">${meta}</div>` : ''}
+              </div>
+            `;
+          }).join('');
+
+          resultsBox.innerHTML = `
+            <div style="margin-bottom:8px;font-weight:700;font-size:15px;">
+              Live results near <span style="color:#3651e0;">${postcode.toUpperCase()}</span>
+            </div>
+            ${itemsHtml}
+            <div style="margin-top:12px;font-size:13px;color:#64748b;">
+              For full alerts and email notifications, use DentistRadar directly.
+            </div>
+          `;
+        } catch (err) {
+          console.error(err);
+          resultsBox.innerHTML =
+            '<span style="color:#b91c1c;">Something went wrong checking availability. Please try again in a moment.</span>';
+        }
+      });
+    }
+
+    // 2. GPRadar waitlist – currently front-end only (ready to hook to backend)
     document.getElementById('gpWaitlistForm')?.addEventListener('submit', function(e) {
       e.preventDefault();
-      document.getElementById('gpWaitlistMessage').innerHTML = 
+      // TODO: later, POST to your backend: /api/gp/waitlist
+      document.getElementById('gpWaitlistMessage').innerHTML =
         '<span style="color:#10b981;">Thank you — you’re on the GPRadar priority list!</span>';
       this.reset();
     });
 
-    // Smooth scroll for internal links
+    // 3. Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const el = document.querySelector(targetId);
+        if (!el) return;
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
   </script>
