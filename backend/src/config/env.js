@@ -1,8 +1,6 @@
-// Loads environment variables and enforces required ones
-require("dotenv").config();
+// src/config/env.js
+import dotenv from 'dotenv';
 
-module.exports = {
-  port: process.env.PORT || 4000,
-  mongoUri: process.env.MONGODB_URI || "",
-};
-
+export function loadEnv() {
+  dotenv.config();
+}
